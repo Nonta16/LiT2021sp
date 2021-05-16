@@ -21,3 +21,9 @@ get '/list' do
     @stations = json["response"]["station"]
     erb :list
 end
+
+get '/api/station' do
+    uri = URI("http://express.heartrails.com/api/json")
+    uri.query = URI.encode_www_form({
+        
+    })
