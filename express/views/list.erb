@@ -17,6 +17,18 @@
 					<span class="line"><%= station["line"] %></span>
 					<span class="name"><%= station["name"] %></span>
 				</div>
+				<div id="detail">
+					<div>
+						<h2>次の駅</h2>
+					</div>
+					<div class="next"></div>
+				</div>
+				<div id="detail">
+					<div>
+						<h2>前の駅</h2>
+					</div>
+					<div class="prev"></div>
+				</div>
 			<% end %>
 		</div>
 	</div>
@@ -25,9 +37,19 @@
 			$(".station").click(function() {
 				var line = $(".line",this).text();
 				var name = $(".name",this).text();
-				console.log(line + " " + name);
+				$.ajax("/api/station", {
+					type: "GET",
+					data: { line; line, name: name }.
+					datatype: "json",
+				})
+				.done(function (json) {
+					$("#detatil .next").text(json["next"]);
+				});
+				.done(function (json) {
+					$("#detatil .prev").text(json["prev"]);
+				});
 			});
-		}
+		};
 	</script>
 </body>
 </html>
