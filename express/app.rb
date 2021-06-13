@@ -7,11 +7,14 @@ require 'net/http'
 require 'sinatra/activerecord'
 require './models'
 
-get'/'do
-    erb:form
+get '/' do
+    @histories = History.all
+    @favorites = History.where(favorite: true)
+    erb :form
 end
 
 get '/list' do
+    History.create!(x: params[:x], y: params[:y])
     uri = URI("http://express.heartrails.com/api/json")
     uri.query = URI.encode_www_form({
         method: "getStations",
@@ -42,4 +45,17 @@ get '/api/station' do
         }
     end
     json response
+end
+
+post '/:id/delete' do
+    history = History.find(params[:id])
+    history.delete
+    redirect "/"
+end
+
+post '/:id/update' do
+    history = History.find(params[:id])
+    history.favorite = !history.favorite
+    history.save
+    redirect "/"
 end
