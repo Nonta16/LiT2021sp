@@ -1,4 +1,1 @@
-ActiveRecord::Base.establish_connection
-
-class History < ActiveRecord::Base
-end
+Activerecord::Base.establish_connection

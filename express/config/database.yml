@@ -1,7 +1,7 @@
 default_env: &default
   adapter: postgresql
   encoding: unicode
-  database: histories
+  database: s_express
 
 development:
   <<: *default
