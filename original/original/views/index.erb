@@ -1,0 +1,256 @@
+<% unless session[:user] %>
+  <a href="/signin">ログイン</a><a href="/signup">新規登録</a><br>
+  <h2>未ログイン</h2>
+<% else %>
+  <a href="/signout">ログアウト</a>
+  <h2><%= User.find(session[:user]).email %>としてログイン</h2>
+  住んでるところ:
+  <% if User.find(session[:user]).adress_id == 1 %>
+  	<p>北海道</p>
+  <% elsif User.find(session[:user]).adress_id == 2 %>
+  	<p>青森県</p>
+  <% elsif User.find(session[:user]).adress_id == 3 %>
+          岩手県
+          <% elsif User.find(session[:user]).adress_id == 4 %>
+          宮城県
+          <% elsif User.find(session[:user]).adress_id == 5 %>
+          秋田県
+          <% elsif User.find(session[:user]).adress_id == 6 %>
+          山形県
+          <% elsif User.find(session[:user]).adress_id == 7 %>
+          福島県
+          <% elsif User.find(session[:user]).adress_id == 8 %>
+          茨城県
+          <% elsif User.find(session[:user]).adress_id == 9 %>
+          栃木県
+          <% elsif User.find(session[:user]).adress_id == 10 %>
+          群馬県
+          <% elsif User.find(session[:user]).adress_id == 11 %>
+          埼玉県
+          <% elsif User.find(session[:user]).adress_id == 12 %>
+          千葉県
+          <% elsif User.find(session[:user]).adress_id == 13 %>
+          東京都
+          <% elsif User.find(session[:user]).adress_id == 14 %>
+          神奈川県
+          <% elsif User.find(session[:user]).adress_id == 15 %>
+          新潟県
+          <% elsif User.find(session[:user]).adress_id == 16 %>
+          富山県
+          <% elsif User.find(session[:user]).adress_id == 17 %>
+          石川県
+          <% elsif User.find(session[:user]).adress_id == 18 %>
+          福井県
+          <% elsif User.find(session[:user]).adress_id == 19 %>
+          山梨県
+          <% elsif User.find(session[:user]).adress_id == 20 %>
+          長野県
+          <% elsif User.find(session[:user]).adress_id == 21 %>
+          岐阜県
+          <% elsif User.find(session[:user]).adress_id == 22 %>
+          静岡県
+          <% elsif User.find(session[:user]).adress_id == 23 %>
+          愛知県
+          <% elsif User.find(session[:user]).adress_id == 24 %>
+          三重県
+          <% elsif User.find(session[:user]).adress_id == 25 %>
+          滋賀県
+          <% elsif User.find(session[:user]).adress_id == 26 %>
+          京都府
+          <% elsif User.find(session[:user]).adress_id == 27 %>
+          大阪府
+          <% elsif User.find(session[:user]).adress_id == 28 %>
+          兵庫県
+          <% elsif User.find(session[:user]).adress_id == 29 %>
+          奈良県
+          <% elsif User.find(session[:user]).adress_id == 30 %>
+          和歌山県
+          <% elsif User.find(session[:user]).adress_id == 31 %>
+          鳥取県
+          <% elsif User.find(session[:user]).adress_id == 32 %>
+          島根県
+          <% elsif User.find(session[:user]).adress_id == 33 %>
+          岡山県
+          <% elsif User.find(session[:user]).adress_id == 34 %>
+          広島県
+          <% elsif User.find(session[:user]).adress_id == 35 %>
+          山口県
+          <% elsif User.find(session[:user]).adress_id == 36 %>
+          徳島県
+          <% elsif User.find(session[:user]).adress_id == 37 %>
+          香川県
+          <% elsif User.find(session[:user]).adress_id == 38 %>
+          愛媛県
+          <% elsif User.find(session[:user]).adress_id == 39 %>
+          高知県
+          <% elsif User.find(session[:user]).adress_id == 40 %>
+          福岡県
+          <% elsif User.find(session[:user]).adress_id == 41 %>
+          滋賀県
+          <% elsif User.find(session[:user]).adress_id == 42 %>
+          長崎県
+          <% elsif User.find(session[:user]).adress_id == 43 %>
+          熊本県
+          <% elsif User.find(session[:user]).adress_id == 44 %>
+          大分県
+          <% elsif User.find(session[:user]).adress_id == 45 %>
+          宮崎県
+          <% elsif User.find(session[:user]).adress_id == 46 %>
+          鹿児島県
+          <% elsif User.find(session[:user]).adress_id == 47 %>
+          沖縄県
+ <% end %>
+<% end %>
+
+<h3>気象庁の天気予報WebAPI経由で表示</h3>
+
+    <table>
+        <tr id="publishingOffice">
+            <th>発表者</th>
+            <td></td>
+        </tr>
+        <tr id="reportDatetime">
+            <th>報告日時</th>
+            <td></td>
+        </tr>
+        <tr id="targetArea">
+            <th>対象地域</th>
+        </tr>
+        <tr id="today">
+            <th>今日の天気</th>
+            <td></td>
+        </tr>
+        <tr id="tomorrow">
+            <th>明日の天気</th>
+            <td></td>
+        </tr>
+        <tr id="waiwai">
+            <th>今日のおすすめの運動メニュー</th>
+        </tr>
+    </table>
+
+	<script>
+  <% if User.find(session[:user]).adress_id == 1 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/016000.json";
+          <% elsif User.find(session[:user]).adress_id == 2 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/020000.json";
+          <% elsif User.find(session[:user]).adress_id == 3 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/030000.json";
+          <% elsif User.find(session[:user]).adress_id == 4 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/040000.json";
+          <% elsif User.find(session[:user]).adress_id == 5 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/orecast/050000.json";
+          <% elsif User.find(session[:user]).adress_id == 6 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/060000.json";
+          <% elsif User.find(session[:user]).adress_id == 7 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/070000.json";
+          <% elsif User.find(session[:user]).adress_id == 8 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/080000.json";
+          <% elsif User.find(session[:user]).adress_id == 9 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/orecast/090000.json";
+          <% elsif User.find(session[:user]).adress_id == 10 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/100000.json";
+          <% elsif User.find(session[:user]).adress_id == 11 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/110000.json";
+          <% elsif User.find(session[:user]).adress_id == 12 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/120000.json";
+          <% elsif User.find(session[:user]).adress_id == 13 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json";
+          <% elsif User.find(session[:user]).adress_id == 14 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/140000.json";
+          <% elsif User.find(session[:user]).adress_id == 15 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/150000.json";
+          <% elsif User.find(session[:user]).adress_id == 16 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/160000.json";
+          <% elsif User.find(session[:user]).adress_id == 17 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/170000.json";
+          <% elsif User.find(session[:user]).adress_id == 18 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/180000.json";
+          <% elsif User.find(session[:user]).adress_id == 19 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/190000.json";
+          <% elsif User.find(session[:user]).adress_id == 20 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/200000.json";
+          <% elsif User.find(session[:user]).adress_id == 21 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/210000.json";
+          <% elsif User.find(session[:user]).adress_id == 22 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/220000.json";
+          <% elsif User.find(session[:user]).adress_id == 23 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/230000.json";
+          <% elsif User.find(session[:user]).adress_id == 24 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/240000.json";
+          <% elsif User.find(session[:user]).adress_id == 25 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/250000.json";
+          <% elsif User.find(session[:user]).adress_id == 26 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/260000.json";
+          <% elsif User.find(session[:user]).adress_id == 27 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json";
+          <% elsif User.find(session[:user]).adress_id == 28 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/280000.json";
+          <% elsif User.find(session[:user]).adress_id == 29 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/290000.json";
+          <% elsif User.find(session[:user]).adress_id == 30 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/300000.json";
+          <% elsif User.find(session[:user]).adress_id == 31 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/310000.json";
+          <% elsif User.find(session[:user]).adress_id == 32 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/320000.json";
+          <% elsif User.find(session[:user]).adress_id == 33 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/330000.json";
+          <% elsif User.find(session[:user]).adress_id == 34 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/340000.json";
+          <% elsif User.find(session[:user]).adress_id == 35 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/350000.json";
+          <% elsif User.find(session[:user]).adress_id == 36 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/360000.json";
+          <% elsif User.find(session[:user]).adress_id == 37 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/370000.json";
+          <% elsif User.find(session[:user]).adress_id == 38 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/380000.json";
+          <% elsif User.find(session[:user]).adress_id == 39 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/390000.json";
+          <% elsif User.find(session[:user]).adress_id == 40 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/400000.json";
+          <% elsif User.find(session[:user]).adress_id == 41 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/410000.json";
+          <% elsif User.find(session[:user]).adress_id == 42 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/420000.json";
+          <% elsif User.find(session[:user]).adress_id == 43 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/430000.json";
+          <% elsif User.find(session[:user]).adress_id == 44 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/440000.json";
+          <% elsif User.find(session[:user]).adress_id == 45 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/450000.json";
+          <% elsif User.find(session[:user]).adress_id == 46 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/460000.json";
+          <% elsif User.find(session[:user]).adress_id == 47 %>
+          let url = "https://www.jma.go.jp/bosai/forecast/data/forecast/470000.json";
+  <% end %>
+
+fetch(url)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(weather) {
+        console.log(weather);
+        // 特定の地域(今回は東京)だけ選択して変数に詰め直す
+        let area = weather[0].timeSeries[0].areas[0];
+        console.log(area); 
+        // 発表者と報告日時の情報を画面に書き出す
+        document.getElementById("publishingOffice").lastElementChild.textContent = weather[0].publishingOffice;
+        document.getElementById("reportDatetime").lastElementChild.textContent = weather[0].reportDatetime;
+        // 特定地域の情報を画面に書き出す
+        document.getElementById("targetArea").lastElementChild.textContent = area.area.name;
+        document.getElementById("today").lastElementChild.textContent = area.weathers[0];
+        document.getElementById("tomorrow").lastElementChild.textContent = area.weathers[1];
+        let rain = "雨";
+        var i = document.createElement("iframe");
+        i.src = "https://www.youtube.com/embed/ey6eyVD2A3A";
+        if(area.weathers[0].indexOf(rain)){
+        document.getElementById("waiwai").appendChild(i);
+        }else{
+            document.getElementById("waiwai").appendChild(i);
+        }
+        });
+	</script>
+	
+	<!--<iframe width="1280" height="720" src="https://www.youtube.com/embed/ZTjwBhjvXoc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --!>

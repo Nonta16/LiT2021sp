@@ -6,7 +6,6 @@ require 'sinatra/reloader' if development?
 require 'sinatra/activerecord'
 
 require './models/login.rb'
-
 enable :sessions
 
 helpers do
@@ -16,11 +15,11 @@ helpers do
 end
 
 get '/' do
-    put "aaa"
-    binding.pry
     if current_user.nil?
-        redirect '/sign_up'
+        redirect '/signup'
     end
+    
+    @user = User.find_by(id:session[:user])
     erb :index
 end
 
@@ -29,13 +28,14 @@ get '/signup' do
 end
 
 post '/signup' do
-    user = User.create(
+    @user = User.create(
         email: params[:email],
         password: params[:password],
-        password_confirmation: params[:password_confirmation]
+        password_confirmation: params[:password_confirmation],
+        adress_id: params[:adress_id]
         )
-        if user.persisted?
-            session[:user] = user.id
+        if @user.persisted?
+            session[:user] = @user.id
         end
         redirect '/'
     end
@@ -45,7 +45,7 @@ get '/signin' do
 end
 
 post '/signin' do
-    user = User.find_by(name: params[:name])
+    user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
         session[:user] = user.id
     end
